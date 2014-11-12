@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="C1" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d] %p %t %c - %m%n" />
+		</layout>
+	</appender>
+	<appender name="FRoot" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/tomcat.log" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="9" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d] %p %t %c - %m%n" />
+		</layout>
+	</appender>
+	<appender name="FContext" class="org.apache.log4j.RollingFileAppender">
+		<!-- change file name -->
+		<param name="File" value="${catalina.home}/logs/Struts2Seasar2Sample.log" />
+		<param name="MaxFileSize" value="5MB" />
+		<param name="MaxBackupIndex" value="9" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d] %p %t %c - %m%n" />
+		</layout>
+	</appender>
+	<appender name="FContextErr" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/Struts2Seasar2Sample_err.log" />
+		<param name="MaxFileSize" value="5MB" />
+		<param name="MaxBackupIndex" value="9" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d] %p %t %c - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="warn" />
+		</filter>
+	</appender>
+	<appender name="HRootErr" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${catalina.home}/logs/tomcat_error.html" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="9" />
+		<layout class="org.apache.log4j.HTMLLayout" />
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="warn" />
+		</filter>
+	</appender>
+
+	<category name="edu.leo">
+		<level value="debug" />
+	</category>
+	<category name="org.seasar">
+        <level value="debug" />
+    </category>
+    <category name="org.seasar.extension.dbcp">
+        <level value="info" />
+    </category>
+
+	<root>
+		<level value="info" />
+		<appender-ref ref="C1" />
+		<!-- <appender-ref ref="FRoot" /> -->
+		<appender-ref ref="FContext" />
+		<appender-ref ref="FContextErr" />
+		<!-- <appender-ref ref="HRootErr" /> -->
+	</root>
+
+</log4j:configuration>

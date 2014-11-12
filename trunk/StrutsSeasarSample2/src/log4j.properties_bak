@@ -1,0 +1,18 @@
+### set log levels ###
+log4j.rootLogger = INFO, Appender1, Appender2
+
+### Appender1
+log4j.appender.Appender1 = org.apache.log4j.ConsoleAppender
+log4j.appender.Appender1.ImmediateFlush=true
+log4j.appender.Appender1.layout=org.apache.log4j.PatternLayout
+log4j.appender.Appender1.layout.ConversionPattern=%-5p %d [%t] %m%n
+
+### Appender2
+log4j.appender.Appender2 = org.apache.log4j.FileAppender
+log4j.appender.Appender2.File = ${catalina.home}/logs/Struts2Seasar2Sample.log
+log4j.appender.Appender2.Append = true
+log4j.appender.Appender2.Threshold = DEBUG ## \u8F93\u51FADEBUG\u7EA7\u522B\u4EE5\u4E0A\u7684\u65E5\u5FD7
+log4j.appender.Appender2.layout = org.apache.log4j.PatternLayout
+log4j.appender.Appender2.layout.ConversionPattern = %-d{yyyy-MM-dd HH:mm:ss}  [ %t:%r ] - [ %p ]  %m%n
+
+log4j.category.org.seasar=DEBUG
