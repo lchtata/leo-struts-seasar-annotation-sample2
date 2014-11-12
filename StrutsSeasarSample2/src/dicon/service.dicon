@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC
+	"-//SEASAR//DTD S2Container 2.3//EN"
+	"http://www.seasar.org/dtd/components23.dtd">
+<components>
+	<include path="/dicon/j2ee.dicon"/>
+	<include path="/dicon/dao.dicon"/>
+
+	<!-- sample dao -->
+	<!--
+	<component name="loginDao" class="edu.leo.dao.LoginDao">
+		<aspect>dao.interceptor</aspect>
+	</component>
+	-->
+	<!-- sample service -->
+	<!--
+	<component name="LoginService" class="edu.leo.service.impl.LoginServiceImpl">
+		<aspect>j2ee.requiredTx</aspect>
+		//######## Convention over Configuration(do not set is ok in here)########
+		<property name="loginDao">loginDao</property>
+	</component>
+	-->
+
+	<!-- Dao Auto Regist -->
+	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+		<initMethod name="addClassPattern">
+			<arg>"edu.leo.dao"</arg>
+			<arg>".*Dao"</arg>
+		</initMethod>
+	</component>
+	<!-- set [dao.interceptor] into Dao -->
+	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister" >
+		<property name="interceptor">
+			dao.interceptor
+		</property>
+		<initMethod name="addClassPattern" >
+			<arg>"edu.leo.dao"</arg>
+			<arg>".*Dao"</arg>
+		</initMethod>
+	</component>
+
+	<!-- service Auto Regist-->
+	<component class="org.seasar.framework.container.autoregister.FileSystemComponentAutoRegister">
+		<initMethod name="addClassPattern">
+			<arg>"edu.leo.service"</arg>
+			<arg>".*Impl"</arg>
+		</initMethod>
+	</component>
+	<!-- set [j2ee.requiredTx] into service -->
+	<component class="org.seasar.framework.container.autoregister.AspectAutoRegister" >
+		<property name="interceptor">
+			j2ee.requiredTx
+		</property>
+		<initMethod name="addClassPattern" >
+			<arg>"edu.leo.service"</arg>
+			<arg>".*Impl"</arg>
+		</initMethod>
+	</component>
+
+</components>
