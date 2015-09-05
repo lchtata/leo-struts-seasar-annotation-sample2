@@ -1,0 +1,1 @@
+leo-struts-seasar-annotation-sample2
